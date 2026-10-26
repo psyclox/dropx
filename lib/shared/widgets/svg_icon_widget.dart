@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_theme.dart';
 
 /// A reusable SVG icon widget that renders SVG strings using CustomPaint.
 /// In a real app, use flutter_svg package for full SVG support.

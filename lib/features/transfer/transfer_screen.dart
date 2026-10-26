@@ -641,9 +641,6 @@ class _TransferArrowPainter extends CustomPainter {
       ..strokeWidth = 2
       ..strokeCap = StrokeCap.round;
     
-    final start = Offset(0, size.height / 2);
-    final end = Offset(size.width, size.height / 2);
-    
     // Draw dashed line
     const dashWidth = 8.0;
     const dashSpace = 6.0;
@@ -678,16 +675,16 @@ class _TransferArrowPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
     
-    final arrowX = isSending ? size.width - 8 : 8;
+    final arrowX = isSending ? size.width - 8.0 : 8.0;
     final arrowPath = Path();
     if (isSending) {
-      arrowPath.moveTo(arrowX - 8, size.height / 2 - 6);
+      arrowPath.moveTo(arrowX - 8.0, size.height / 2 - 6.0);
       arrowPath.lineTo(arrowX, size.height / 2);
-      arrowPath.lineTo(arrowX - 8, size.height / 2 + 6);
+      arrowPath.lineTo(arrowX - 8.0, size.height / 2 + 6.0);
     } else {
-      arrowPath.moveTo(arrowX + 8, size.height / 2 - 6);
+      arrowPath.moveTo(arrowX + 8.0, size.height / 2 - 6.0);
       arrowPath.lineTo(arrowX, size.height / 2);
-      arrowPath.lineTo(arrowX + 8, size.height / 2 + 6);
+      arrowPath.lineTo(arrowX + 8.0, size.height / 2 + 6.0);
     }
     canvas.drawPath(arrowPath, arrowPaint);
   }

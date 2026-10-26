@@ -1,23 +1,88 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:math' as math;
 
-part 'device_model.freezed.dart';
-part 'device_model.g.dart';
+class DeviceModel {
+  final String id;
+  final String name;
+  final String ip;
+  final String platform;
+  final DateTime lastSeen;
+  final bool isConnected;
+  final int signalStrength;
+  final String? avatarColor;
 
-@freezed
-class DeviceModel with _$DeviceModel {
-  const factory DeviceModel({
-    required String id,
-    required String name,
-    required String ip,
-    required String platform,
-    required DateTime lastSeen,
-    @Default(false) bool isConnected,
-    @Default(0) int signalStrength,
+  const DeviceModel({
+    required this.id,
+    required this.name,
+    required this.ip,
+    required this.platform,
+    required this.lastSeen,
+    this.isConnected = false,
+    this.signalStrength = 0,
+    this.avatarColor,
+  });
+
+  DeviceModel copyWith({
+    String? id,
+    String? name,
+    String? ip,
+    String? platform,
+    DateTime? lastSeen,
+    bool? isConnected,
+    int? signalStrength,
     String? avatarColor,
-  }) = _DeviceModel;
+  }) {
+    return DeviceModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ip: ip ?? this.ip,
+      platform: platform ?? this.platform,
+      lastSeen: lastSeen ?? this.lastSeen,
+      isConnected: isConnected ?? this.isConnected,
+      signalStrength: signalStrength ?? this.signalStrength,
+      avatarColor: avatarColor ?? this.avatarColor,
+    );
+  }
 
-  factory DeviceModel.fromJson(Map<String, dynamic> json) =>
-      _$DeviceModelFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'ip': ip,
+      'platform': platform,
+      'lastSeen': lastSeen.toIso8601String(),
+      'isConnected': isConnected,
+      'signalStrength': signalStrength,
+      'avatarColor': avatarColor,
+    };
+  }
+
+  factory DeviceModel.fromJson(Map<String, dynamic> json) {
+    return DeviceModel(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? 'Unknown',
+      ip: json['ip'] as String? ?? '',
+      platform: json['platform'] as String? ?? 'unknown',
+      lastSeen: json['lastSeen'] != null
+          ? DateTime.tryParse(json['lastSeen'] as String) ?? DateTime.now()
+          : DateTime.now(),
+      isConnected: json['isConnected'] as bool? ?? false,
+      signalStrength: json['signalStrength'] as int? ?? 0,
+      avatarColor: json['avatarColor'] as String?,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  String toString() => 'DeviceModel(id: $id, name: $name, ip: $ip, platform: $platform)';
 }
 
 extension DeviceModelX on DeviceModel {
@@ -40,11 +105,9 @@ extension DeviceModelX on DeviceModel {
   
   String get initials {
     final words = name.trim().split(' ');
-    if (words.length >= 2) {
+    if (words.length >= 2 && words[0].isNotEmpty && words[1].isNotEmpty) {
       return '${words[0][0]}${words[1][0]}'.toUpperCase();
     }
-    return name.substring(0, min(2, name.length)).toUpperCase();
+    return name.substring(0, math.min(2, name.length)).toUpperCase();
   }
 }
-
-int min(int a, int b) => a < b ? a : b;
