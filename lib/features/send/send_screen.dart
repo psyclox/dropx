@@ -3,12 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:io';
 import '../../core/theme/app_theme.dart';
 import '../../core/theme/app_icons.dart';
 import '../../shared/widgets/svg_icon_widget.dart';
-import '../../shared/widgets/glassmorphic_card.dart';
-import '../../core/providers/app_providers.dart';
 
 class SendScreen extends ConsumerStatefulWidget {
   const SendScreen({super.key});

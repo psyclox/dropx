@@ -275,7 +275,7 @@ class _ConnectScreenState extends ConsumerState<ConnectScreen>
             ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: () => ref.read(discoveredDevicesProvider.notifier).state.clear(),
+            onTap: () => ref.read(discoveredDevicesProvider.notifier).clear(),
             child: SvgIconWidget(svgPath: AppIcons.refresh, size: 18, color: AppColors.textMuted),
           ),
         ],
@@ -291,7 +291,7 @@ class _ConnectScreenState extends ConsumerState<ConnectScreen>
           AnimatedBuilder(
             animation: _scanController,
             builder: (_, __) {
-              return Container(
+              return SizedBox(
                 width: 120,
                 height: 120,
                 child: Stack(

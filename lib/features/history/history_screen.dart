@@ -326,7 +326,6 @@ class _HistoryCardState extends State<_HistoryCard> {
       case TransferStatus.cancelled: return AppColors.warning;
       case TransferStatus.pending: return AppColors.info;
       case TransferStatus.paused: return AppColors.warning;
-      default: return AppColors.info;
     }
   }
 
@@ -338,7 +337,6 @@ class _HistoryCardState extends State<_HistoryCard> {
       case TransferStatus.cancelled: return 'Cancelled';
       case TransferStatus.pending: return 'Pending';
       case TransferStatus.paused: return 'Paused';
-      default: return 'Pending';
     }
   }
 

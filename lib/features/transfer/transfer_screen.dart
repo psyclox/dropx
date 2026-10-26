@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,7 +7,6 @@ import '../../core/theme/app_icons.dart';
 import '../../shared/widgets/svg_icon_widget.dart';
 import '../../shared/widgets/dropx_logo.dart';
 import '../../core/models/transfer_model.dart';
-import '../../core/providers/app_providers.dart';
 import '../../core/services/transfer_service.dart';
 
 class TransferScreen extends ConsumerStatefulWidget {

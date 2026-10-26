@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import 'package:network_info_plus/network_info_plus.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart';
@@ -483,6 +481,10 @@ class DiscoveredDevicesNotifier extends StateNotifier<List<DeviceModel>> {
 
   void remove(String id) {
     state = state.where((d) => d.id != id).toList();
+  }
+
+  void clear() {
+    state = [];
   }
 
   @override

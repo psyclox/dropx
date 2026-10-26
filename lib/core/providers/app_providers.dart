@@ -1,8 +1,7 @@
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import 'package:go_router/go_router.dart';
-import '../app_router.dart';
 
 // ─── App State ──────────────────────────────────────────────────────────────
 
@@ -193,8 +192,13 @@ class TransferHistoryNotifier extends StateNotifier<List<Map<String, dynamic>>> 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
     final historyJson = prefs.getStringList('transfer_history') ?? [];
-    // Parse history from JSON strings
-    state = [];
+    try {
+      state = historyJson
+          .map((item) => jsonDecode(item) as Map<String, dynamic>)
+          .toList();
+    } catch (_) {
+      state = [];
+    }
   }
   
   Future<void> addEntry(Map<String, dynamic> entry) async {
@@ -204,7 +208,8 @@ class TransferHistoryNotifier extends StateNotifier<List<Map<String, dynamic>>> 
     state = trimmed;
     
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('transfer_history', []);
+    final serialized = trimmed.map((e) => jsonEncode(e)).toList();
+    await prefs.setStringList('transfer_history', serialized);
   }
   
   Future<void> clearAll() async {

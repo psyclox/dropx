@@ -367,67 +367,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 }
 
-// ─── Logo Mark SVG ──────────────────────────────────────────────────────────
 
-class _DropXLogoMark extends StatelessWidget {
-  const _DropXLogoMark();
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(44, 44),
-      painter: _LogoPainter(),
-    );
-  }
-}
-
-class _LogoPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2.5
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..style = PaintingStyle.stroke;
-
-    final w = size.width;
-    final h = size.height;
-
-    // Draw stylized X with arrows
-    // Left arrow pointing right-up
-    final path1 = Path()
-      ..moveTo(w * 0.1, h * 0.7)
-      ..lineTo(w * 0.5, h * 0.25)
-      ..lineTo(w * 0.9, h * 0.7);
-    canvas.drawPath(path1, paint);
-
-    // Right arrow pointing right-down  
-    final path2 = Path()
-      ..moveTo(w * 0.1, h * 0.3)
-      ..lineTo(w * 0.5, h * 0.75)
-      ..lineTo(w * 0.9, h * 0.3);
-    canvas.drawPath(path2, paint);
-
-    // Lightning bolt center accent
-    final fillPaint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    final bolt = Path()
-      ..moveTo(w * 0.5, h * 0.15)
-      ..lineTo(w * 0.38, h * 0.5)
-      ..lineTo(w * 0.47, h * 0.5)
-      ..lineTo(w * 0.5, h * 0.85)
-      ..lineTo(w * 0.62, h * 0.5)
-      ..lineTo(w * 0.53, h * 0.5)
-      ..close();
-    canvas.drawPath(bolt, fillPaint);
-  }
-
-  @override
-  bool shouldRepaint(_LogoPainter _) => false;
-}
 
 // ─── Particle Painter ────────────────────────────────────────────────────────
 

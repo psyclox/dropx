@@ -4,8 +4,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/providers/app_providers.dart';
-import '../../shared/widgets/glassmorphic_card.dart';
-import '../../shared/widgets/gradient_button.dart';
 import '../../shared/widgets/svg_icon_widget.dart';
 import '../../shared/widgets/dropx_logo.dart';
 import '../../core/theme/app_icons.dart';
@@ -950,52 +948,4 @@ class _NavItem extends StatelessWidget {
   }
 }
 
-// ─── Small Logo Mark ─────────────────────────────────────────────────────────
 
-class _SmallLogoMark extends StatelessWidget {
-  const _SmallLogoMark();
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(18, 18),
-      painter: _SmallLogoPainter(),
-    );
-  }
-}
-
-class _SmallLogoPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 1.5
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-
-    final w = size.width;
-    final h = size.height;
-
-    canvas.drawLine(Offset(w * 0.1, h * 0.7), Offset(w * 0.5, h * 0.25), paint);
-    canvas.drawLine(Offset(w * 0.5, h * 0.25), Offset(w * 0.9, h * 0.7), paint);
-    canvas.drawLine(Offset(w * 0.1, h * 0.3), Offset(w * 0.5, h * 0.75), paint);
-    canvas.drawLine(Offset(w * 0.5, h * 0.75), Offset(w * 0.9, h * 0.3), paint);
-
-    final boltPaint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.fill;
-
-    final bolt = Path()
-      ..moveTo(w * 0.5, h * 0.15)
-      ..lineTo(w * 0.38, h * 0.5)
-      ..lineTo(w * 0.48, h * 0.5)
-      ..lineTo(w * 0.5, h * 0.85)
-      ..lineTo(w * 0.62, h * 0.5)
-      ..lineTo(w * 0.52, h * 0.5)
-      ..close();
-    canvas.drawPath(bolt, boltPaint);
-  }
-
-  @override
-  bool shouldRepaint(_SmallLogoPainter _) => false;
-}
